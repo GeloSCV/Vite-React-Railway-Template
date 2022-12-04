@@ -11,14 +11,17 @@ function SumitTicket() {
     description:"",
   })
   const navigate=useNavigate();
+  
  
   const handlesubmit= async (e)=>{
     e.preventDefault();
     const res= await fetch("https://tiendacomputo-server-production.up.railway.app/support/ticket",{
       method:"POST",
       body:JSON.stringify(ticket),
-      headers:{"content-Type":"application/json"}
+      headers:{"content-Type":"application/json"},
+      mode: 'cors',
     });
+    console.log(res)
     const data= await res.json();
     console.log(data)
 
