@@ -1,44 +1,49 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+import {
+  BrowserRouter, Routes, Route
+} from "react-router-dom";
+import Home from './pages/Home'
+import About from './pages/About'
+import Ranking from './pages/Ranking'
+import Reviews from './pages/Reviews'
+import Support from './pages/support'
+import NavbarComponent from './components/Navbar'
+import ContextFilter from './components/Context/ContextFilter';
+import ContextProvider from './components/Context/ContextProvider';
+import Carrito from './pages/carrito';
+import Details from './pages/Details/Details';
+import SumitTicket from './pages/sumitTicket'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <ContextProvider>
+    <ContextFilter>
+    <div className="App"> 
+          <BrowserRouter>
+                <NavbarComponent/>
+                      <Routes>
+                        
+                      
+                          <Route path="/" exact element={<Home/>}/>
+                          <Route path="/about" exact element={<About/>} />
+                          <Route path="/ranking" exact element={<Ranking/>} />
+                          <Route path="/reviews" exact element={<Reviews/>} />
+                          <Route path="/support" exact element={<Support/>} />
+                          <Route path= "/:id" exact element={<Details/>} />
+                          <Route path= "/ticketsumit" exact element={<SumitTicket/>} />
+                          
+                          <Route path="/shoppingcar" exact element={<Carrito/>} />
+                          <Route path="*" exact element={<Home/>} />
+                        
+                      </Routes>
+            </BrowserRouter>
+      
+    
     </div>
+    </ContextFilter>
+    </ContextProvider>
   )
 }
 
